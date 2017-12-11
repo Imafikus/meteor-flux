@@ -63,7 +63,7 @@
 	}
 
 	function get_binarg_eca_pretty(ui) {
-		return get_binarg_eca(ui)*1000 +" km<sup>2</sup> &middot; h ";
+		return get_binarg_eca(ui)*1000;// +" km<sup>2</sup> &middot; h ";
 	}
 
     function get_timestamp(field) {
@@ -71,6 +71,15 @@
         time = $('#'+field+'time').val()+':00'
         return date+'T'+time
     }
+
+    //textbox init
+    function init_textboxes(){
+        $( "#binarg-meteors-textbox" ).val(0);
+        $( "#binarg-eca-textbox" ).val(0); 
+        $( "#time1-textbox").val(0);
+        $( "#time2-textbox").val(0);
+        //console.log("Usao u init_textboxes");
+    } 
 
 	function duration_to_hours(duration) {
 		hours = Math.pow(10, duration);
@@ -185,6 +194,7 @@
 
 	$(function() {
         $('#tabs').tab();
+        init_textboxes();
 
 		$( "#slider-meteors" ).slider({
 			min: -0.35,
@@ -192,8 +202,7 @@
 			step:0.0001,
 			value: Math.log(50) / Math.log(10),
 			slide: function( event, ui ) {
-				$( "#binarg-meteors" ).html( get_binarg_meteors(ui) );
-			}
+            $( "#binarg-meteors-textbox" ).val( get_binarg_meteors(ui) );            }
 		});
 
 		$( "#binarg-meteors" ).html( get_binarg_meteors() );
@@ -204,11 +213,11 @@
 			step:0.0001,
 			value: Math.log(20) / Math.log(10),
 			slide: function( event, ui ) {
-				$( "#binarg-eca" ).html( get_binarg_eca_pretty(ui) );
+				$( "#binarg-eca-textbox" ).val( get_binarg_eca_pretty(ui) );
 			}
 		});
 
-		$( "#binarg-eca" ).html( get_binarg_eca_pretty() );
+		//$( "#binarg-eca" ).html( get_binarg_eca_pretty() );
 
 		$( "#slider-duration" ).slider({
 			range: true,
