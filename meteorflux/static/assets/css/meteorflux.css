@@ -87,3 +87,7 @@ h1, h2, h3 {
     line-height: 18px;
 
 }
+.textbox {
+    width: 50px;
+    padding: 2px;
+}
