@@ -230,6 +230,22 @@
 				$( "#duration" ).text( format_duration(ui.values[0]) + " - " + format_duration(ui.values[1]) );
 			}
 		});
+        
+        //update slider on textbox change 
+        $('#binarg-meteors-textbox').change(function () {
+            var value = Math.log10(this.value);
+            selector = $( "#slider-meteors");  
+            selector.slider("value", value);
+            //console.log("Usao u change");
+        })
+        
+        $('#binarg-eca-textbox').change(function () {
+            var value = Math.log10(this.value/1000); //it's divided by 1000 cuz textbox has pretty value, which is real value multiplied by 1000
+            selector = $( "#slider-eca");  
+            selector.slider("value", value);
+            //console.log("Usao u change");
+        })
+        
 		$( "#duration" ).text( format_duration( $("#slider-duration").slider("values", 0) ) +
 			" - " + format_duration( $("#slider-duration").slider("values", 1) ) );
 
