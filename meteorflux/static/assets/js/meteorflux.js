@@ -72,13 +72,14 @@
         return date+'T'+time
     }
 
-    //textbox init
+    //textbox init to current values
     function init_textboxes(){
-        $( "#binarg-meteors-textbox" ).val(0);
+        $('#slider').slider("values")[0];
+        var meteors_val = $('#slider-meteors').slider("value");
+        meteors_val = Math.round(Math.pow(10, meteors_val))
+        $( "#binarg-meteors-textbox" ).val(meteors_val);
         $( "#binarg-eca-textbox" ).val(0); 
-        $( "#time1-textbox").val(0);
-        $( "#time2-textbox").val(0);
-        //console.log("Usao u init_textboxes");
+        //console.log(meteors_val);
     } 
 
 	function duration_to_hours(duration) {
@@ -194,7 +195,6 @@
 
 	$(function() {
         $('#tabs').tab();
-        init_textboxes();
 
 		$( "#slider-meteors" ).slider({
 			min: -0.35,
@@ -202,7 +202,13 @@
 			step:0.0001,
 			value: Math.log(50) / Math.log(10),
 			slide: function( event, ui ) {
-            $( "#binarg-meteors-textbox" ).val( get_binarg_meteors(ui) );            }
+            $( "#binarg-meteors-textbox" ).val( get_binarg_meteors(ui) );
+            },
+            create: function( event, ui ) {
+                var meteors_val = $(this).slider("value");
+                meteors_val = Math.round(Math.pow(10, meteors_val));
+                $( "#binarg-meteors-textbox" ).val(meteors_val);
+            }
 		});
 
 		$( "#binarg-meteors" ).html( get_binarg_meteors() );
@@ -214,7 +220,12 @@
 			value: Math.log(20) / Math.log(10),
 			slide: function( event, ui ) {
 				$( "#binarg-eca-textbox" ).val( get_binarg_eca_pretty(ui) );
-			}
+			},
+            create: function( event, ui ){
+                var eca_val = $(this).slider("value");
+                eca_val = Math.round(Math.pow(10, eca_val));
+                $( "#binarg-eca-textbox" ).val(eca_val*1000);
+            } 
 		});
 
 		//$( "#binarg-eca" ).html( get_binarg_eca_pretty() );
@@ -233,17 +244,22 @@
         
         //update slider on textbox change 
         $('#binarg-meteors-textbox').change(function () {
-            var value = Math.log10(this.value);
-            selector = $( "#slider-meteors");  
-            selector.slider("value", value);
-            //console.log("Usao u change");
+            var value = this.value;
+            if ((value >= 0) && (value <= 1000)){
+                var value = Math.log10(value);
+                selector = $( "#slider-meteors");  
+                selector.slider("value", value);
+            }
+            else console.log("bad input");
         })
         
         $('#binarg-eca-textbox').change(function () {
-            var value = Math.log10(this.value/1000); //it's divided by 1000 cuz textbox has pretty value, which is real value multiplied by 1000
-            selector = $( "#slider-eca");  
-            selector.slider("value", value);
-            //console.log("Usao u change");
+            var value = this.value;
+            if ((value >= 0) && (value <= 1000000)){
+                var value = Math.log10(value/1000); //it's divided by 1000 cuz textbox has pretty value, which is real value multiplied by 1000
+                selector = $( "#slider-eca");  
+                selector.slider("value", value);
+            }
         })
         
 		$( "#duration" ).text( format_duration( $("#slider-duration").slider("values", 0) ) +

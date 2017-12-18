@@ -183,14 +183,15 @@
             </p>
             <p>
               <label for="binarg-meteors" class="control-label">
-                  Minimum meteors per bin = <input type="text" id="binarg-meteors-textbox" class="textbox">
+                  Minimum meteors per bin = 
+                  <input type="number" id="binarg-meteors-textbox" class="textbox" min=0 max = 1000>
               </label>
             </p>
             <div id="slider-meteors"></div> 
              
             <p>
               <label for="binarg-eca" class="control-label">
-              Minimum collection area per bin = <input type="text" id="binarg-eca-textbox" class="textbox">
+                Minimum collection area per bin = <input type="number" id="binarg-eca-textbox" class="textbox" min="0" max="1000000">
               </label>
               <label>km<sup>2</sup> &middot; h </label>
             </p>
