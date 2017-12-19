@@ -245,17 +245,16 @@
         //update slider on textbox change 
         $('#binarg-meteors-textbox').change(function () {
             var value = this.value;
-            if ((value >= 0) && (value <= 1000)){
+            if ((typeof value == 'number') && (value >= 0) && (value <= 1000)){
                 var value = Math.log10(value);
                 selector = $( "#slider-meteors");  
                 selector.slider("value", value);
             }
-            else console.log("bad input");
         })
         
         $('#binarg-eca-textbox').change(function () {
             var value = this.value;
-            if ((value >= 0) && (value <= 1000000)){
+            if ((typeof value == 'number') && (value >= 0) && (value <= 1000000)){
                 var value = Math.log10(value/1000); //it's divided by 1000 cuz textbox has pretty value, which is real value multiplied by 1000
                 selector = $( "#slider-eca");  
                 selector.slider("value", value);

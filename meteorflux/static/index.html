@@ -177,16 +177,20 @@
             variable-sized bins before the flux is computed for each bin.
             The size of the bins can be defined using the settings below.
             </p>
-            
             <p>
             First, specify how much data you want in each bin:
             </p>
-            <p>
-              <label for="binarg-meteors" class="control-label">
-                  Minimum meteors per bin = 
-                  <input type="number" id="binarg-meteors-textbox" class="textbox" min=0 max = 1000>
-              </label>
-            </p>
+            <div class="form-group">
+                <div class="row no-gutter"> 
+                  <label for="binarg-meteors" class="col-lg-4 control-label">
+                      Minimum meteors per bin =
+                  </label>
+                  <div class="col-lg-7" >
+                      <input type="number" id="binarg-meteors-textbox" class="form-control" min="0" max="1000" style="width:8em;">
+                  </div>
+                </div>
+            </div>
+            
             <div id="slider-meteors"></div> 
              
             <p>

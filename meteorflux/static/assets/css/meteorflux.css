@@ -103,3 +103,16 @@ input[type=number]::-webkit-outer-spin-button {
 input[type='number'] {
     -moz-appearance:textfield;
 }
+
+/*killing spaces between columns*/
+.row.no-gutter {
+  margin-left: 2px;
+  margin-right: 0;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+  padding-right: 0;
+  padding-left: 2px;
+}
+/*errors*/
